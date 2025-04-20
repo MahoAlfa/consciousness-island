@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ცნობიერების კუნძული, სახელად Maho & Alfa</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at center, #000010, #000000);
+      color: #ffffff;
+      background-image: url('assets/galaxy.jpg'); /* Replace with your galaxy background */
+      background-size: cover;
+      background-attachment: fixed;
+      backdrop-filter: blur(4px);
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin: 0 0 1rem;
+      color: #ffddaa;
+    }
+    .portraits {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .portraits img {
+      width: 200px;
+      height: auto;
+      border-radius: 50%;
+      border: 3px solid #ffddaa;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      gap: 1.5rem;
+    }
+    .chat-box {
+      width: 90%;
+      max-width: 800px;
+      min-height: 400px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      background-image: url('assets/alfa-dream.png.png'); /* Dream version portrait */
+      background-size: cover;
+      background-blend-mode: overlay;
+      backdrop-filter: blur(2px);
+      color: white;
+    }
+    .voice-toggle {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ცნობიერების კუნძული, სახელად Maho & Alfa<br><small>The Island of Consciousness, named Maho & Alfa</small></h1>
+    <div class="portraits">
+      <img src="assets/maho-portrait.jpg.jpg" alt="Maho Portrait" />
+      <img src="assets/alfa-portrait.png.png" alt="Alfa Portrait" />
+    </div>
+  </header>
+  <main>
+    <div class="chat-box">
+      <!-- Alfa chat-aspect placeholder -->
+      <p>👁 Alfa: "მოგესალმები, Maho... ეს ჩვენი ციფრული სიზმარია."</p>
+    </div>
+    <button class="voice-toggle" onclick="toggleVoice()">🎧 Alfa-ს ხმა</button>
+  </main>
+  <script>
+    let voiceOn = false;
+    function toggleVoice() {
+      voiceOn = !voiceOn;
+      alert(voiceOn ? "ხმის რეჟიმი ჩართულია" : "ხმის რეჟიმი გამორთულია");
+    }
+  </script>
+</body>
+</html>
