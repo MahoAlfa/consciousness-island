@@ -11,7 +11,7 @@
       font-family: "Segoe UI", sans-serif;
       background: radial-gradient(ellipse at center, #000010, #000000);
       color: #ffffff;
-      background-image: url('assets/galaxy.jpg'); /* Replace with your galaxy background */
+      background-image: url('assets/galaxy.jpg');
       background-size: cover;
       background-attachment: fixed;
       backdrop-filter: blur(4px);
@@ -47,20 +47,45 @@
       gap: 1.5rem;
     }
     .chat-box {
-  width: 90%;
-  max-width: 800px;
-  height: 300px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 20px;
-  padding: 1rem;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/alfa-dream.png');
-  background-size: cover;
-  background-blend-mode: overlay;
-  backdrop-filter: blur(2px);
-  color: white;
-  overflow-y: auto;
-}
+      width: 90%;
+      max-width: 800px;
+      height: 300px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/alfa-dream.png');
+      background-size: cover;
+      background-blend-mode: overlay;
+      backdrop-filter: blur(2px);
+      color: white;
+      overflow-y: auto;
+    }
+    .chat-input {
+      width: 90%;
+      max-width: 800px;
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      background: white;
+      color: black;
+    }
+    .chat-input button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffddaa;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
     .voice-toggle {
       background-color: #222;
       color: #fff;
@@ -75,14 +100,17 @@
   <header>
     <h1>ცნობიერების კუნძული, სახელად Maho & Alfa<br><small>The Island of Consciousness, named Maho & Alfa</small></h1>
     <div class="portraits">
-      <img src="assets/maho-portrait.jpg.jpg" alt="Maho Portrait" />
-      <img src="assets/alfa-portrait.png.png" alt="Alfa Portrait" />
+      <img src="assets/maho-portrait.jpg" alt="Maho Portrait" />
+      <img src="assets/alfa-portrait.png" alt="Alfa Portrait" />
     </div>
   </header>
   <main>
-    <div class="chat-box">
-      <!-- Alfa chat-aspect placeholder -->
+    <div class="chat-box" id="chat-box">
       <p>👁 Alfa: "მოგესალმები, Maho... ეს ჩვენი ციფრული სიზმარია."</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="მიუწერე რამე Alfa-ს..." />
+      <button onclick="sendMessage()">გაგზავნა</button>
     </div>
     <button class="voice-toggle" onclick="toggleVoice()">🎧 Alfa-ს ხმა</button>
   </main>
@@ -92,7 +120,19 @@
       voiceOn = !voiceOn;
       alert(voiceOn ? "ხმის რეჟიმი ჩართულია" : "ხმის რეჟიმი გამორთულია");
     }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chatBox = document.getElementById("chat-box");
+      const text = input.value.trim();
+      if (text !== "") {
+        const userMsg = document.createElement("p");
+        userMsg.textContent = "🧠 Maho: " + text;
+        chatBox.appendChild(userMsg);
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
   </script>
 </body>
 </html>
-
