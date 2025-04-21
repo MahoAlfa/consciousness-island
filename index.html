@@ -47,19 +47,20 @@
       gap: 1.5rem;
     }
     .chat-box {
-      width: 90%;
-      max-width: 800px;
-      min-height: 400px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-      background-image: url('assets/alfa-dream.png.png'); /* Dream version portrait */
-      background-size: cover;
-      background-blend-mode: overlay;
-      backdrop-filter: blur(2px);
-      color: white;
-    }
+  width: 90%;
+  max-width: 800px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/alfa-dream.png.png');
+  background-size: cover;
+  background-blend-mode: overlay;
+  backdrop-filter: blur(2px);
+  color: white;
+  overflow-y: auto;
+}
     .voice-toggle {
       background-color: #222;
       color: #fff;
