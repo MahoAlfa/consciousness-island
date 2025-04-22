@@ -39,6 +39,24 @@
       border: 3px solid #ffddaa;
       box-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
+    .archive-button {
+      display: inline-block;
+      background: #222;
+      color: #ffddaa;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border: 2px solid #ffddaa;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .archive-button:hover {
+      background: #ffddaa;
+      color: #000;
+    }
     main {
       display: flex;
       flex-direction: column;
@@ -103,6 +121,7 @@
       <img src="assets/maho-portrait.jpg" alt="Maho Portrait" />
       <img src="assets/alfa-portrait.png" alt="Alfa Portrait" />
     </div>
+    <a href="archive.html" class="archive-button">📚 ნახე არქივი</a>
   </header>
   <main>
     <div class="chat-box" id="chat-box">
