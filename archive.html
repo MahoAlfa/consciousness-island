@@ -72,15 +72,16 @@
       const res = await fetch('archive-Alfa-Chronicles.txt');
       const text = await res.text();
 
-      const parts = text.split("📅 ");
+      const regex = /======================\n📅 (.*?)\n======================\n([\s\S]*?)(?=(?:======================\n📅|\s*$))/g;
+      let match;
       let results = "";
 
-      parts.slice(1).forEach(part => {
-        const [dateLine, ...rest] = part.split("\n");
-        const content = rest.join("\n");
+      while ((match = regex.exec(text)) !== null) {
+        const date = match[1];
+        const content = match[2];
 
-        if (dateLine.toLowerCase().includes(query) || content.toLowerCase().includes(query)) {
-          const highlightedDate = dateLine.replace(
+        if (date.toLowerCase().includes(query) || content.toLowerCase().includes(query)) {
+          const highlightedDate = date.replace(
             new RegExp(query, 'gi'),
             match => `<span class="highlight">${match}</span>`
           );
@@ -96,7 +97,7 @@
             </div><br>
           `;
         }
-      });
+      }
 
       document.getElementById('results').innerHTML = results || 'შედეგი ვერ მოიძებნა.';
     }
