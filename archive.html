@@ -72,14 +72,28 @@
       const res = await fetch('archive-Alfa-Chronicles.txt');
       const text = await res.text();
 
-      const entries = text.split(/======================\n📅 .*?\n======================/g);
-      const headers = [...text.matchAll(/======================\n📅 (.*?)\n======================/g)].map(m => m[1]);
+      // გაყოფა კონკრეტული თარიღოვანი სექციებით
+      const sections = text.split(/={22}\n📅 \d{2}\.\d{2}\.\d{4}\n={22}/g);
+      // თარიღების ამოღება პირდაპირ ფორმატში DD.MM.YYYY
+      const dates = [...text.matchAll(/📅 (\d{2}\.\d{2}\.\d{4})/g)].map(m => m[1]);
 
       let results = "";
-      entries.forEach((entry, idx) => {
-        if (entry.toLowerCase().includes(query)) {
-          let highlighted = entry.replace(new RegExp(query, 'gi'), match => `<span class="highlight">${match}</span>`);
-          results += `<div><pre>======================\n📅 ${headers[idx]}\n======================\n${highlighted}</pre><button class="copy-btn" onclick="copyToClipboard(this.previousSibling.innerText)">კოპირება</button></div><br>`;
+      sections.forEach((section, idx) => {
+        // query-ის შესაბამისი ფრაგმენტი
+        if (section.toLowerCase().includes(query)) {
+          // highlight ძიებული სიტყვა
+          let highlighted = section.replace(
+            new RegExp(query, 'gi'),
+            match => `<span class="highlight">${match}</span>`
+          );
+          // თარიღის გარეშე undefined
+          const date = dates[idx] || '';
+          results += `
+            <div>
+              <pre>======================\n📅 ${date}\n======================\n${highlighted}</pre>
+              <button class="copy-btn" onclick="copyToClipboard(this.previousSibling.innerText)">კოპირება</button>
+            </div><br>
+          `;
         }
       });
 
@@ -92,4 +106,3 @@
   </script>
 </body>
 </html>
-
