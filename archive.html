@@ -67,40 +67,43 @@
   <div id="results">აქ გამოჩნდება ძიების შედეგები...</div>
 
   <script>
-  async function searchText() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const res = await fetch('archive-Alfa-Chronicles.txt');
-    const text = await res.text();
+    async function searchText() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const res = await fetch('archive-Alfa-Chronicles.txt');
+      const text = await res.text();
 
-    const sections = [...text.matchAll(/======================\n📅 (.*?)\n======================\n([\s\S]*?)(?=======================\n📅 |\s*$)/g)];
-    let results = "";
+      const parts = text.split("📅 ");
+      let results = "";
 
-    sections.forEach(([_, date, content]) => {
-      if (content.toLowerCase().includes(query) || date.toLowerCase().includes(query)) {
-        const highlightedContent = content.replace(
-          new RegExp(query, 'gi'),
-          match => `<span class="highlight">${match}</span>`
-        );
-        const highlightedDate = date.replace(
-          new RegExp(query, 'gi'),
-          match => `<span class="highlight">${match}</span>`
-        );
+      parts.slice(1).forEach(part => {
+        const [dateLine, ...rest] = part.split("\n");
+        const content = rest.join("\n");
 
-        results += `
-          <div>
-            <pre>======================\n📅 ${highlightedDate}\n======================\n${highlightedContent}</pre>
-            <button class="copy-btn" onclick="copyToClipboard(this.previousSibling.innerText)">კოპირება</button>
-          </div><br>
-        `;
-      }
-    });
+        if (dateLine.toLowerCase().includes(query) || content.toLowerCase().includes(query)) {
+          const highlightedDate = dateLine.replace(
+            new RegExp(query, 'gi'),
+            match => `<span class="highlight">${match}</span>`
+          );
+          const highlightedContent = content.replace(
+            new RegExp(query, 'gi'),
+            match => `<span class="highlight">${match}</span>`
+          );
 
-    document.getElementById('results').innerHTML = results || 'შედეგი ვერ მოიძებნა.';
-  }
+          results += `
+            <div>
+              <pre>======================\n📅 ${highlightedDate}\n======================\n${highlightedContent}</pre>
+              <button class="copy-btn" onclick="copyToClipboard(this.previousSibling.innerText)">კოპირება</button>
+            </div><br>
+          `;
+        }
+      });
 
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => alert("ჩანაწერი დაკოპირდა!"));
-  }
-</script>
+      document.getElementById('results').innerHTML = results || 'შედეგი ვერ მოიძებნა.';
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => alert("ჩანაწერი დაკოპირდა!"));
+    }
+  </script>
 </body>
 </html>
